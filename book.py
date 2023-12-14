@@ -24,6 +24,9 @@ def search_book(query, top_n=5):
     results = []
     
     for index in top_indices:
+        if data['Book-Title'][index] in [result['title'] for result in results]:
+            continue
+        
         results.append({
             "isbn": data['ISBN'][index],
             "title": data['Book-Title'][index],
@@ -34,14 +37,15 @@ def search_book(query, top_n=5):
         })  
     return results
 
-@app.route("/", methods=["GET", "POST"])
-def home():
-    if request.method == "POST":
+@app.route("/")
+def index():
+    return render_template("index.html")
+
+@app.route("/search", methods=["POST"])
+def search():
         query = request.form["query"]
         results = search_book(query)
         return render_template("results.html", query=query, results=results)
-    else:
-        return render_template("index.html")
     
 if __name__ == "__main__":
     app.run(debug=True)
