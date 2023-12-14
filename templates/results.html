@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Search Results for "{{ query }}"</title>
+  </head>
+  <body>
+    <h1>Results for "{{ query }}"</h1>
+    {% if results | length %}
+    <table>
+      <thead>
+        <tr>
+          <th>ISBN</th>
+          <th>Title</th>
+          <th>Author</th>
+          <th>Publisher</th>
+          <th>Year</th>
+          <th>Image</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for result in results %}
+        <tr>
+          <td>{{ result.isbn }}</td>
+          <td>{{ result.title }}</td>
+          <td>{{ result.author }}</td>
+          <td>{{ result.publisher }}</td>
+          <td>{{ result.year }}</td>
+          <td><img src="{{ result.image_url }}" alt="book cover" /></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% else %}
+    <p>No products found matching your search.</p>
+    {% endif %}
+  </body>
+</html>
