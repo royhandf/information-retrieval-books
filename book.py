@@ -7,7 +7,7 @@ app = Flask(__name__)
 
 data = pd.read_csv('Books.csv')
 
-columns_for_search = ['Book-Title', 'Book-Author']
+columns_for_search = ['Book-Title', 'Book-Author', 'Publisher']
 
 combined_columns = data[columns_for_search].fillna('').apply(lambda x: ' '.join(x), axis=1)
 
